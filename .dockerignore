@@ -1,0 +1,14 @@
+# Taken from https://github.com/dotnet/dotnet-docker/blob/main/samples/dotnetapp/.dockerignore
+
+# directories
+**/bin/
+**/obj/
+**/out/
+
+# files
+Dockerfile*
+**/*.trx
+**/*.md
+**/*.ps1
+**/*.cmd
+**/*.sh

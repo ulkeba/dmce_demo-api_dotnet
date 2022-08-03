@@ -68,3 +68,21 @@
   }
    ```
    For more details about the versioning with GitVersion, see [GitVersion Mainline Development](https://gitversion.net/docs/reference/modes/mainline).
+
+
+# Setup infrastructure to build container
+- References
+  - [.NET Docker Sample](https://github.com/dotnet/dotnet-docker/blob/main/samples/dotnetapp/README.md)
+- Build container:
+  ```
+  $ sudo docker build --build-arg API_VERSION="<build-command>" -t demo-api_dotnet:latest .
+  ```
+- Run container:
+  ```
+  $ docker run -it --rm -p 8080:80 demo-api_dotnet:latest
+  ```
+- Test call:
+  ```
+  $ curl http://localhost:8080/VersionInfo
+  {"version":"<build-command>"}
+  ```
