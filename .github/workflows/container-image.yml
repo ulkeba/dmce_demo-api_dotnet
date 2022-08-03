@@ -76,7 +76,7 @@ jobs:
         login-server: ${{ secrets.AZ_ACR_NAME }}.azurecr.io
         
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.AZ_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ steps.gitversion.outputs.semVer }}
+      run: docker build . --file Dockerfile --build-arg API_VERSION="${{ steps.gitversion.outputs.fullSemVer }}" --tag ${{ secrets.AZ_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ steps.gitversion.outputs.semVer }}
       
     - name: Push Image to ACR
       run: docker push ${{ secrets.AZ_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ steps.gitversion.outputs.semVer }}
