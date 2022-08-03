@@ -86,3 +86,19 @@
   $ curl http://localhost:8080/VersionInfo
   {"version":"<build-command>"}
   ```
+
+# Setup GitHub project
+- Create new project
+  ```
+  $ gh repo create dmce_demo-api_dotnet --public
+  ```
+- Add remote
+  ```
+  $ git remote add origin git@github.com:<YOUR NAME HERE>/dmce_demo-api_dotnet.git
+  ```
+- Set secrets to push to container registry.
+  ```
+  $ gh secret set AZ_ACR_NAME --body "[YOUR ACR NAME HERE]"
+  $ gh secret set AZ_SP_CLIENT_ID --body "[YOUR SP ID HERE]"
+  $ gh secret set AZ_SP_CLIENT_SECRET --body "[YOUR SP PASSWORD HERE]"
+  ```
