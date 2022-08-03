@@ -54,3 +54,17 @@
   }
   ```
 - _Note_ The empty configuration file could have been omitted as only default values apply. It is added here to provide transparency about the tool feature and create the file in the repository to set parameters if necessary. For details, see [GitVersion - Configuration](https://gitversion.net/docs/reference/configuration)
+- Example: Set tag to specify version 0.2.0 and print version details:
+  ```
+  $ git tag v0.2.0
+
+  $ docker run -it --rm -v "$(pwd):/repo"   gittools/gitversion:5.10.3 /repo
+  {
+    "SemVer": "0.2.0",
+    "FullSemVer": "0.2.0",
+    "InformationalVersion": "0.2.0+Branch.main.Sha.1ffbc3efbaff6e74316eb46af97cb50a7f9289fc",
+    "BranchName": "main",
+    ...
+  }
+   ```
+   For more details about the versioning with GitVersion, see [GitVersion Mainline Development](https://gitversion.net/docs/reference/modes/mainline).
