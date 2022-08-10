@@ -75,7 +75,7 @@
   - [.NET Docker Sample](https://github.com/dotnet/dotnet-docker/blob/main/samples/dotnetapp/README.md)
 - Build container:
   ```
-  $ sudo docker build --build-arg API_VERSION="<build-command>" -t demo-api_dotnet:latest .
+  $ docker build --build-arg API_VERSION="<build-command>" -t demo-api_dotnet:latest .
   ```
 - Run container:
   ```
