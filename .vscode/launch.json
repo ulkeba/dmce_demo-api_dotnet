@@ -22,7 +22,8 @@
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "API_VERSION": "<local-development>"
+                "API_VERSION": "<local-development>",
+                "ENVIRONMENT_NAME": "developer-environment"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
