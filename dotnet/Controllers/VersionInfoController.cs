@@ -12,6 +12,7 @@ public class VersionInfoController : ControllerBase
 
     private static Lazy<string> lazyVersion = new Lazy<string>(InitializeVersion);
     private static Lazy<string> lazyEnvironmentName = new Lazy<string>(InitializeEnvironmentName);
+    private static Lazy<string> lazyDbConnectionString = new Lazy<string>(InitializeDbConnectionString);
 
     private static string InitializeVersion()
     {
@@ -22,6 +23,20 @@ public class VersionInfoController : ControllerBase
     private static string InitializeEnvironmentName()
     {
         string? retVal = Environment.GetEnvironmentVariable("ENVIRONMENT_NAME");
+        return retVal != null ? retVal : "<unknown>";
+    }
+
+    private static string InitializeDbConnectionString()
+    {
+        string? retVal = null;
+        try
+        {
+            retVal = System.IO.File.ReadAllText(@"/mnt/secrets/db-connection-string").Trim();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("ERROR: " + e.Message);
+        }
         return retVal != null ? retVal : "<unknown>";
     }
     
@@ -36,7 +51,8 @@ public class VersionInfoController : ControllerBase
         return Ok(new
         {
             version = lazyVersion.Value,
-            environment = lazyEnvironmentName.Value
+            environment = lazyEnvironmentName.Value,
+            dbConnectionString = lazyDbConnectionString.Value
         });
     }
 }   
