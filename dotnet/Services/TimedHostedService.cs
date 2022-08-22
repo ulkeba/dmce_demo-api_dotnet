@@ -22,7 +22,7 @@ public class TimedHostedService : IHostedService, IDisposable
         gauge = appMeter.CreateObservableGauge<double>("some-gauge", () =>
         {
             double nowInMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            double scaled = (nowInMs / (1000f));
+            double scaled = (nowInMs / (10 * 1000f));
             return Math.Sin(scaled);
         });
     }
