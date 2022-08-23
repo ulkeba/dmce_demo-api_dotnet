@@ -27,6 +27,13 @@ builder.Services.AddOpenTelemetryMetrics(b =>
         .AddMeter(MeterName);
 });
 
+if (!builder.Environment.IsDevelopment())
+{    
+    builder.Host.ConfigureLogging((_, logging) =>
+        {
+            logging.AddJsonConsole();
+        });
+}
 
 var app = builder.Build();
 
