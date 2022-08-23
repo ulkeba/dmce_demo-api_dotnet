@@ -36,13 +36,19 @@ public class TimedHostedService : IHostedService, IDisposable
 
     private void DoWork(object? state)
     {
-        var count = Interlocked.Increment(ref executionCount);
-
         int r = random.Next(DEMO_TAG_VALUES.Length);
         int increment = random.Next((r + 1) * 5);
         counter.Add(increment, new KeyValuePair<string, object?>("demo-tag", DEMO_TAG_VALUES[r]));
 
-        _logger.LogInformation("Timed Hosted Service is working. Count: {Count}", count);
+        var count = Interlocked.Increment(ref executionCount);
+        if (count % 20 == 0)
+            _logger.LogError("Timed Hosted Service is working. Count: {Count}", count);
+        else if (count % 5 == 0)
+            _logger.LogWarning("Timed Hosted Service is working. Count: {Count}", count);
+        else
+            _logger.LogInformation("Timed Hosted Service is working. Count: {Count}", count);
+
+
     }
 
     public Task StopAsync(CancellationToken stoppingToken)
