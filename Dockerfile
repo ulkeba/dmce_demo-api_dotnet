@@ -14,9 +14,17 @@ WORKDIR /source
 RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+# <HACK: use image 'sdk' instead of 'aspnet' as hack to allow "dotnet dev-certs" below.>
+FROM mcr.microsoft.com/dotnet/sdk:6.0 
 ARG API_VERSION=<dockerfile-default>
 ENV API_VERSION  ${API_VERSION}
+
+# <HACK to add https endpoints with dev certs>
+ENV ASPNETCORE_URLS "https://+:443;http://+:80"
+ENV ASPNETCORE_HTTPS_PORT 443
+RUN dotnet dev-certs https
+# <HACK end>
+
 WORKDIR /app
 COPY --from=build /app ./
 ENTRYPOINT ["dotnet", "WeatherForecastAPI.dll"]
