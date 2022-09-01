@@ -23,7 +23,9 @@
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "API_VERSION": "<local-development>",
-                "ENVIRONMENT_NAME": "developer-environment"
+                "ENVIRONMENT_NAME": "developer-environment",
+                "OIDC_AUDIENCE": "https://management.core.windows.net/",
+                "OIDC_AUTHORITY": "https://sts.windows.net/[YOUR TENANT ID]/"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
