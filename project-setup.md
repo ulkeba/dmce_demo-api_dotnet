@@ -102,3 +102,16 @@
   $ gh secret set AZ_SP_CLIENT_ID --body "[YOUR SP ID HERE]"
   $ gh secret set AZ_SP_CLIENT_SECRET --body "[YOUR SP PASSWORD HERE]"
   ```
+
+# Emit metrics
+- Add the `System.Diagnostics.DiagnosticSource` package to the project.
+  ```
+  dotnet add package System.Diagnostics.DiagnosticSource
+  ```
+
+- Use sample code for class `WeatherForecastAPI.Services.TimedHostedService` background task from (Background tasks with hosted services in ASP.NET Core)[https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-6.0&tabs=netcore-cli#timed-background-tasks] and maintain an instance of `System.Diagnostics.Metrics.Metric` and `...Counter<int>`.
+
+- Add OpenTelemetry packages as described in (Collect metrics)[https://docs.microsoft.com/en-us/dotnet/core/diagnostics/metrics-collection].
+  ```
+  dotnet add package OpenTelemetry.Exporter.Prometheus --version 1.3.0-rc.2
+  ```
